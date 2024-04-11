@@ -11,4 +11,6 @@ jobs:
         with:
           username: "jabuxas"
           reponame: "notes-app"
-          token: ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+          token:
+            ${{ secrets.GITHUB_TOKEN }} # Leave this line unchanged
+            #
