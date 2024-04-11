@@ -64,6 +64,8 @@ const addNote = () => {
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;800;900&display=swap');
+
 main {
   height: 100vh;
   width: 100vw;
@@ -110,6 +112,10 @@ header button {
   margin: 0 20px 20px 0;
 }
 
+.card-schema:hover #close {
+  display: block;
+}
+
 .card-schema button {
   align-self: flex-start;
 }
@@ -119,6 +125,15 @@ header button {
   flex-direction: column;
   justify-content: space-between;
   padding: 10px;
+}
+
+#close {
+  display: none;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  background-color: #aaaaaa00;
+  font-size: 1em;
 }
 
 .date {
