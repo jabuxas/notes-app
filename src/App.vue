@@ -10,6 +10,10 @@ function getRandomColor() {
   return "hsl(" + Math.random() * 360 + ", 100%, 75%)";
 }
 
+const removeFromArray = (id) => {
+  notes.value.splice(id, 1);
+}
+
 const addNote = () => {
   if (newNote.value.length < 10) {
     errorMessage.value = "! The note has to be at least 10 characters long."
@@ -44,11 +48,15 @@ const addNote = () => {
         <button @click="showModal = true">+</button>
       </header>
       <div class="cards-container">
-        <div v-for="note in notes" :key="note.id" class="card" :style="{ backgroundColor: note.backgroundColor }">
-          <p class="main-text">
-            {{ note.text }}
-          </p>
-          <p class="date">{{ note.date.toLocaleDateString("pt-BR") }}</p>
+        <div v-for="note, index in notes" :key="note.id" class="card-schema"
+          :style="{ backgroundColor: note.backgroundColor }">
+          <div class="card">
+            <p class="main-text">
+              {{ note.text }}
+            </p>
+            <p class="date">{{ note.date.toLocaleDateString("pt-BR") }}</p>
+          </div>
+          <button @click="removeFromArray(index)" id="close">X</button>
         </div>
       </div>
     </div class="container">
@@ -91,16 +99,26 @@ header button {
   font-size: 20px;
 }
 
-.card {
+.card-schema {
   width: 225px;
   height: 225px;
   background-color: rgb(237, 182, 44);
   padding: 10px;
   border-radius: 15px;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   margin: 0 20px 20px 0;
+}
+
+.card-schema button {
+  align-self: flex-start;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px;
 }
 
 .date {
