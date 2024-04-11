@@ -1,52 +1,47 @@
+<script setup>
+import { ref } from 'vue';
+
+const showModal = ref(false);
+const newNote = ref("Hello world")
+const notes = ref([])
+
+function getRandomColor() {
+  return "hsl(" + Math.random() * 360 + ", 100%, 75%)";
+}
+
+const addNote = () => {
+  notes.value.push({
+    id: Math.floor(Math.random() * 1000000),
+    text: newNote.value,
+    date: new Date(),
+    backgroundColor: getRandomColor(),
+  });
+  showModal.value = false;
+  newNote.value = "";
+}
+
+</script>
+
 <template>
   <main>
-    <div class="overlay">
+    <div v-if="showModal" class="overlay">
       <div class="modal">
-        <textarea name="note" id="note" rows="15" cols="30"></textarea>
-        <button>Add Note</button>
-        <button class="close">Close</button>
+        <textarea v-model="newNote" name="note" id="note" rows="15" cols="30"></textarea>
+        <button @click="addNote">Add Note</button>
+        <button class="close" @click="showModal = false">Close</button>
       </div>
     </div>
     <div class="container">
       <header>
         <h1>Notes</h1>
-        <button>+</button>
+        <button @click="showModal = true">+</button>
       </header>
       <div class="cards-container">
-        <div class="card">
+        <div v-for="note in notes" class="card" :style="{ backgroundColor: note.backgroundColor }">
           <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis veritatis impedit magni nam, harum sunt non
-            animi quos. Neque ipsam a velit quod porro cum saepe hic veritatis facilis ut?
+            {{ note.text }}
           </p>
-          <p class="date">04/10/2021</p>
-        </div>
-        <div class="card">
-          <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis veritatis impedit magni nam, harum sunt non
-            animi quos. Neque ipsam a velit quod porro cum saepe hic veritatis facilis ut?
-          </p>
-          <p class="date">04/10/2021</p>
-        </div>
-        <div class="card">
-          <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis veritatis impedit magni nam, harum sunt non
-            animi quos. Neque ipsam a velit quod porro cum saepe hic veritatis facilis ut?
-          </p>
-          <p class="date">04/10/2021</p>
-        </div>
-        <div class="card">
-          <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis veritatis impedit magni nam, harum sunt non
-            animi quos. Neque ipsam a velit quod porro cum saepe hic veritatis facilis ut?
-          </p>
-          <p class="date">04/10/2021</p>
-        </div>
-        <div class="card">
-          <p class="main-text">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis veritatis impedit magni nam, harum sunt non
-            animi quos. Neque ipsam a velit quod porro cum saepe hic veritatis facilis ut?
-          </p>
-          <p class="date">04/10/2021</p>
+          <p class="date">{{ note.date.toLocaleDateString("pt-BR") }}</p>
         </div>
       </div>
     </div class="container">
