@@ -56,7 +56,7 @@ const addNote = () => {
             </p>
             <p class="date">{{ note.date.toLocaleDateString("pt-BR") }}</p>
           </div>
-          <button @click="removeFromArray(index)" id="close">X</button>
+          <button @click="removeFromArray(index)" id="close">&times;</button>
         </div>
       </div>
     </div class="container">
@@ -130,10 +130,10 @@ header button {
 #close {
   display: none;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
   border: none;
   background-color: #aaaaaa00;
-  font-size: 1em;
+  font-size: 1.5em;
+  font-weight: 300;
 }
 
 .date {
