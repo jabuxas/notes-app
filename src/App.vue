@@ -71,6 +71,7 @@ main {
   width: 100vw;
 }
 
+
 .container {
   max-width: 1000px;
   padding: 10px;
@@ -187,5 +188,20 @@ header button {
   color: red;
   font-weight: bold;
   margin: 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .card {
+    color: black;
+  }
+
+  header button {
+    background-color: #e0e0e0;
+    background-color: rgba(60, 60, 60, 0.66);
+    border-radius: 100%;
+    color: rgba(235, 235, 235, 0.64);
+    font-size: 20px;
+
+  }
 }
 </style>
